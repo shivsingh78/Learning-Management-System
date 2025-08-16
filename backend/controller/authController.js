@@ -25,9 +25,9 @@ export const signUp = async (req,res)=>{
           })
 
           let token = await genrateToken(user._id)
-          req.cookie("token",token, {
+          res.cookie("token",token, {
                httpOnly:true,
-               secure:false,
+               secure:false,   
                sameSite: "Strict",
                maxAge: 7*24*60*60*1000
           })
@@ -55,7 +55,7 @@ export const login = async(req,res)=>{
                return res.status(400).json({message:"Incorrect Password"})
           }
           let token = await genrateToken(user._id)
-          req.cookie("token",token,{
+          res.cookie("token",token,{
                httpOnly:true,
                secure:true,
                sameSite:"Strict",
